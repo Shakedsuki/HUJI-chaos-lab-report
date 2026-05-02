@@ -17,13 +17,11 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{caption}
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{geometry}
 \usepackage{indentfirst}
-\usepackage{xcolor}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins}
 
 % =====================================================================
 % PAGE GEOMETRY
@@ -36,50 +34,17 @@
 \parskip 2mm
 
 % =====================================================================
-% FIGURE BOX — Option A
-%
-% Usage:
-%   \begin{figbox}{כותרת האיור}
-%     \includegraphics[width=0.96\textwidth]{figures/...}
-%     \fcap{תופעה}{התאמה}{פרמטרים}{שגיאה}
-%   \end{figbox}
+% CAPTION STYLE
 % =====================================================================
-\definecolor{boxblue}{RGB}{30, 60, 100}
-\definecolor{capbg}{RGB}{245, 247, 252}
-
-\newenvironment{figbox}[1]{%
-  \begin{tcolorbox}[
-    enhanced,
-    colback=white,
-    colframe=boxblue,
-    coltitle=white,
-    colbacktitle=boxblue,
-    fonttitle=\bfseries\large,
-    title={#1},
-    top=6pt, bottom=6pt,
-    left=6pt, right=6pt,
-    toptitle=4pt, bottomtitle=4pt,
-    lines before break=10,
-  ]
-  \centering
-}{%
-  \end{tcolorbox}
-  \vspace{6pt}
+\captionsetup{
+  justification=raggedright,
+  singlelinecheck=false,
+  font=small,
+  labelfont=bf,
 }
 
-\newcommand{\fcap}[4]{%
-  \par\vspace{4pt}
-  \noindent\colorbox{capbg}{%
-    \begin{minipage}{0.97\textwidth}
-      \vspace{4pt}
-      \textbf{(א) תופעה:} #1\par\smallskip
-      \textbf{(ב) התאמה:} #2\par\smallskip
-      \textbf{(ג) פרמטרים:} #3\par\smallskip
-      \textbf{(ד) שגיאה:} #4
-      \vspace{4pt}
-    \end{minipage}%
-  }%
-}
+% Structured caption label helper: \caplabel{א}{תופעה}
+\newcommand{\caplabel}[2]{\textbf{(#1) #2:}\ }
 
 % =====================================================================
 % DOCUMENT
@@ -134,67 +99,113 @@
 \section*{תוצאות}
 
 % ----- Figure 1: Discrete I-V ----------------------------------------
-\begin{figbox}{איור 1 — עקומת I-V בדידה (גל ריבועי)}
-  \includegraphics[width=0.96\textwidth]{figures/graph1IV.png}
-  \fcap
-    {עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל ריבועי ($R = \SI{470}{\ohm}$).
-     כל נקודה מייצגת ממוצע של דגימות בפלטו. נקודות עם $V_{pp} \geq \SI{6}{\volt}$
-     סוטות מהמודל עקב התנגדות סדרתית בזרמים גבוהים ואינן כלולות בהתאמה.}
-    {$I = I_S\!\left(e^{V_D/nV_T}-1\right)$,\quad $V_T = \SI{25.85}{\milli\volt}$}
-    {$n = \text{TODO}$,\quad $I_S = \text{TODO}\ \si{\ampere}$}
-    {קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$ (2\,V/div, 8-bit);
-     זרם: $\sigma_I = \sigma_{\Delta V}/\SI{470}{\ohm}$}
-\end{figbox}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/graph1IV.png}
+  \caption{%
+    \textbf{איור 1 — עקומת I-V בדידה (גל ריבועי).}
+    \caplabel{א}{תופעה}%
+    עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל ריבועי ($R = \SI{470}{\ohm}$).
+    כל נקודה מייצגת ממוצע של דגימות בפלטו.
+    נקודות עם $V_{pp} \geq \SI{6}{\volt}$ סוטות מהמודל עקב התנגדות סדרתית
+    בזרמים גבוהים ואינן כלולות בהתאמה.
+    \caplabel{ב}{התאמה}%
+    $I = I_S\!\left(e^{V_D/nV_T}-1\right)$,\quad $V_T = \SI{25.85}{\milli\volt}$.
+    \caplabel{ג}{פרמטרים}%
+    $n = \text{TODO}$,\quad $I_S = \text{TODO}\ \si{\ampere}$.
+    \caplabel{ד}{שגיאה}%
+    קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$ (2\,V/div, 8-bit);
+    זרם: $\sigma_I = \sigma_{\Delta V}/\SI{470}{\ohm}$.
+  }
+  \label{fig:iv-discrete}
+\end{figure}
 
 % ----- Figure 2: Continuous I-V (triangle) ---------------------------
-\begin{figbox}{איור 2 — עקומת I-V רציפה (גל משולש)}
-  \includegraphics[width=0.96\textwidth]{figures/graph2IV_Triangle.png}
-  \fcap
-    {עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל משולש. הרצועה הכחולה הרחבה
-     משקפת את שני כיווני הסריקה (עולה ויורדת). היסט חיובי קבוע של
-     $\approx \SI{0.3}{\milli\ampere}$ בהטיה הפוכה הוא ארטיפקט של רמת בסיס ה-ADC.}
-    {$I = I_S\!\left(e^{V_D/nV_T}-1\right)$, מותאם לאזור הטיה קדמית ($V_D > \SI{0.3}{\volt}$)}
-    {$n = \text{TODO}$,\quad $I_S = \text{TODO}\ \si{\ampere}$}
-    {הרצועה הנראית לעין משקפת רעש; אין פס שגיאה פורמלי.}
-\end{figbox}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/graph2IV_Triangle.png}
+  \caption{%
+    \textbf{איור 2 — עקומת I-V רציפה (גל משולש).}
+    \caplabel{א}{תופעה}%
+    עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל משולש.
+    הרצועה הכחולה הרחבה משקפת את שני כיווני הסריקה (עולה ויורדת).
+    היסט חיובי קבוע של $\approx \SI{0.3}{\milli\ampere}$ בהטיה הפוכה
+    הוא ארטיפקט של רמת בסיס ה-ADC, ולא הולכת דיודה פיזיקלית.
+    \caplabel{ב}{התאמה}%
+    $I = I_S\!\left(e^{V_D/nV_T}-1\right)$, מותאם לאזור הטיה קדמית ($V_D > \SI{0.3}{\volt}$).
+    \caplabel{ג}{פרמטרים}%
+    $n = \text{TODO}$,\quad $I_S = \text{TODO}\ \si{\ampere}$.
+    \caplabel{ד}{שגיאה}%
+    הרצועה הנראית לעין משקפת רעש; אין פס שגיאה פורמלי.
+  }
+  \label{fig:iv-triangle}
+\end{figure}
 
 % ----- Figure 3: C(V) ------------------------------------------------
-\begin{figbox}{איור 3 — קיבול מעבר $C_j(V)$}
-  \includegraphics[width=0.96\textwidth]{figures/graph3C_V.png}
-  \fcap
-    {קיבול מעבר דיודת 1N4005 פוחת עם עליית המתח ההפוך, בהתאם לתיאוריית שכבת
-     הניגוד. סך הוריאציה הנמדדת $\approx \SI{4.5}{\pico\farad}$ על בסיס
-     $\approx \SI{200}{\pico\farad}$, מה שמצביע על ריסון חלש של ההתאמה.}
-    {$C_j(V) = a/\!\sqrt{|V|} + c$}
-    {$a = \text{TODO}\ \si{\farad\cdot\volt^{1/2}}$,\quad $c = \text{TODO}\ \si{\farad}$}
-    {אופקי: קוונטיזציית ADC; אנכי ($\sigma_\tau \to \sigma_C = \sigma_\tau/R$): טרם נוסף.}
-\end{figbox}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/graph3C_V.png}
+  \caption{%
+    \textbf{איור 3 — קיבול מעבר $C_j(V)$.}
+    \caplabel{א}{תופעה}%
+    קיבול מעבר דיודת 1N4005 פוחת עם עליית המתח ההפוך, בהתאם לתיאוריית שכבת הניגוד.
+    סך הוריאציה הנמדדת $\approx \SI{4.5}{\pico\farad}$ על בסיס
+    $\approx \SI{200}{\pico\farad}$, מה שמצביע על ריסון חלש של ההתאמה.
+    \caplabel{ב}{התאמה}%
+    $C_j(V) = a/\!\sqrt{|V|} + c$.
+    \caplabel{ג}{פרמטרים}%
+    $a = \text{TODO}\ \si{\farad\cdot\volt^{1/2}}$,\quad $c = \text{TODO}\ \si{\farad}$.
+    \caplabel{ד}{שגיאה}%
+    אופקי: קוונטיזציית ADC;
+    אנכי ($\sigma_\tau \to \sigma_C = \sigma_\tau/R$): טרם נוסף.
+  }
+  \label{fig:cv}
+\end{figure}
 
 % ----- Figure 4: Discrete bifurcation --------------------------------
-\begin{figbox}{איור 4 — דיאגרמת בפורקציה בדידה}
-  \includegraphics[width=0.96\textwidth]{figures/graph4_bifrocation.png}
-  \fcap
-    {דיאגרמת בפורקציה בדידה של מעגל RLD ($R=\SI{470}{\ohm}$, $L=\SI{100}{\milli\henry}$,
-     דיודת 1N4005). מוצגת מפלת הכפלת-מחזור 1→2→4→כאוס ככל שמשרעת הכניסה עולה.
-     גוון האפור — TODO (לבדוק ב-\textenglish{get\_cycles.py}).}
-    {אין התאמה}
-    {אין}
-    {קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$ (2\,V/div, 8-bit); פסי שגיאה — יש להוסיף.}
-\end{figbox}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/graph4_bifrocation.png}
+  \caption{%
+    \textbf{איור 4 — דיאגרמת בפורקציה בדידה של מעגל RLD.}
+    \caplabel{א}{תופעה}%
+    דיאגרמת בפורקציה בדידה ($R=\SI{470}{\ohm}$, $L=\SI{100}{\milli\henry}$, דיודת 1N4005)
+    המציגה את שיאי מתח הדיודה כפונקציה של משרעת הכניסה.
+    מפלת הכפלת-מחזור 1→2→4→כאוס נראית בבירור.
+    גוון האפור — TODO (לבדוק ב-\textenglish{get\_cycles.py}).
+    \caplabel{ב}{התאמה}%
+    אין.
+    \caplabel{ג}{פרמטרים}%
+    אין.
+    \caplabel{ד}{שגיאה}%
+    קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$ (2\,V/div, 8-bit); פסי שגיאה — יש להוסיף.
+  }
+  \label{fig:bif-discrete}
+\end{figure}
 
 % ----- Figure 5: Continuous bifurcation ------------------------------
-\begin{figbox}{איור 5 — מפת בפורקציה רציפה (AM)}
-  \includegraphics[width=0.96\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
-  \fcap
-    {מפת בפורקציה רציפה של מעגל RLD (נושאת $\approx\SI{34}{\kilo\hertz}$,
-     $f_{AM}\approx\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$). כחול = משרעת עולה,
-     אדום = יורדת; ההפרדה מצביעה על היסטרזיס. ענף עליון: שיאי הטיה קדמית;
-     ענף תחתון: שיאי הטיה הפוכה (קבועים, $\approx\SI{-3.5}{\volt}$).}
-    {אין התאמה}
-    {קווי מעבר (הערכה חזותית, $\pm\SI{0.1}{\volt}$):
-     $1\!\to\!2 \approx \SI{3.0}{\volt}$,\quad $2\!\to\!4 \approx \SI{3.5}{\volt}$}
-    {קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$.}
-\end{figbox}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
+  \caption{%
+    \textbf{איור 5 — מפת בפורקציה רציפה (AM).}
+    \caplabel{א}{תופעה}%
+    מפת בפורקציה רציפה של מעגל RLD (נושאת $\approx\SI{34}{\kilo\hertz}$,
+    $f_{AM}\approx\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$).
+    כל נקודה היא שיא מתח דיודה אחד למחזור נושאת.
+    כחול = משרעת עולה, אדום = יורדת; ההפרדה מצביעה על היסטרזיס.
+    ענף עליון: שיאי הטיה קדמית; ענף תחתון: שיאי הטיה הפוכה
+    (קבועים, $\approx\SI{-3.5}{\volt}$).
+    \caplabel{ב}{התאמה}%
+    אין.
+    \caplabel{ג}{פרמטרים}%
+    קווי מעבר מחזור (הערכה חזותית, $\pm\SI{0.1}{\volt}$):
+    $1\!\to\!2 \approx \SI{3.0}{\volt}$,\quad $2\!\to\!4 \approx \SI{3.5}{\volt}$.
+    \caplabel{ד}{שגיאה}%
+    קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$.
+  }
+  \label{fig:bif-cont}
+\end{figure}
 
 \vspace{0.5cm}
 
