@@ -87,9 +87,17 @@
 \begin{figure}[H]
 
 % ----------------------------------------------------------------
-% Row 1 — שבוע 1: circuit (left) | title + description (right)
+% Row 1 — שבוע 1: title + description (left) | circuit (right)
 % ----------------------------------------------------------------
 \noindent
+\begin{minipage}[c]{0.40\textwidth}
+  {\large\textbf{שבוע 1 — אפיון דיודה}}\\[6pt]
+  מחולל פונקציות בטור עם נגד $R=\SI{470}{\ohm}$ ודיודת 1N4005.\\[4pt]
+  נמדדו עקומות I-V בגל ריבועי ובגל משולש, וכן קיבול המעגל דרך קצבי פריקה.\\[4pt]
+  Ch2 מודד את $V_{\text{Ch2}}$; Ch1 מודד את $V_{\text{Ch1}}$.\\[4pt]
+  $I_D = (V_{\text{Ch2}} - V_{\text{Ch1}})/\SI{470}{\ohm}$
+\end{minipage}%
+\hfill
 \begin{minipage}[c]{0.57\textwidth}
   \begin{english}
   \begin{circuitikz}[american, scale=0.78, font=\small]
@@ -109,15 +117,6 @@
     \filldraw[gray] (7.5,2) circle (2pt);
   \end{circuitikz}
   \end{english}
-\end{minipage}%
-\hfill
-\begin{minipage}[c]{0.40\textwidth}
-  \raggedleft
-  {\large\textbf{שבוע 1 — אפיון דיודה}}\\[6pt]
-  מחולל פונקציות בטור עם נגד $R=\SI{470}{\ohm}$ ודיודת 1N4005.\\[4pt]
-  נמדדו עקומות I-V בגל ריבועי ובגל משולש, וכן קיבול המעגל דרך קצבי פריקה.\\[4pt]
-  Ch2 מודד את $V_{\text{Ch2}}$; Ch1 מודד את $V_{\text{Ch1}}$.\\[4pt]
-  $I_D = (V_{\text{Ch2}} - V_{\text{Ch1}})/\SI{470}{\ohm}$
 \end{minipage}
 
 \vspace{8pt}
@@ -125,9 +124,18 @@
 \vspace{6pt}
 
 % ----------------------------------------------------------------
-% Row 2 — שבוע 2: circuit (left) | title + description (right)
+% Row 2 — שבוע 2: title + description (left) | circuit (right)
 % ----------------------------------------------------------------
 \noindent
+\begin{minipage}[c]{0.40\textwidth}
+  {\large\textbf{שבוע 2 — מעגל RLD}}\\[6pt]
+  נוסף סליל $L=\SI{100}{\milli\henry}$ בטור לקבלת מעגל RLD.\\[4pt]
+  נוצר אות סינוסי ונמדד מתח השיא על הדיודה כפונקציה של משרעת הכניסה.\\[4pt]
+  לסריקה רציפה: גל נושא $\approx\SI{34}{\kilo\hertz}$,
+  מודולציית AM בתדר $\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$.\\[4pt]
+  Ch2 ו-Ch1 כנ"ל.
+\end{minipage}%
+\hfill
 \begin{minipage}[c]{0.57\textwidth}
   \begin{english}
   \begin{circuitikz}[american, scale=0.78, font=\small]
@@ -148,16 +156,6 @@
     \filldraw[gray] (9.5,2) circle (2pt);
   \end{circuitikz}
   \end{english}
-\end{minipage}%
-\hfill
-\begin{minipage}[c]{0.40\textwidth}
-  \raggedleft
-  {\large\textbf{שבוע 2 — מעגל RLD}}\\[6pt]
-  נוסף סליל $L=\SI{100}{\milli\henry}$ בטור לקבלת מעגל RLD.\\[4pt]
-  נוצר אות סינוסי ונמדד מתח השיא על הדיודה כפונקציה של משרעת הכניסה.\\[4pt]
-  לסריקה רציפה: גל נושא $\approx\SI{34}{\kilo\hertz}$,
-  מודולציית AM בתדר $\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$.\\[4pt]
-  Ch2 ו-Ch1 כנ"ל.
 \end{minipage}
 
 \caption{תרשימי המעגל הניסויי — שבוע 1 (למעלה) ושבוע 2 (למטה).}
