@@ -1,30 +1,37 @@
 \documentclass[11pt]{article}
-%% Written by Amir Sarid - March 2022
-%% Bibliography example taken as-is from the overleaf guide
-\title{Thesis Title}
-\author{
-Author Name
-\thanks{School of Mathematical Sciences, Raymond and Beverly Sackler Faculty of Exact Sciences, Tel Aviv University, Tel Aviv 6997801, Israel.
-Email: {\tt author@mail.tau.ac.il}.}
-}
-\date{Month and Year}
 
+% =====================================================================
+% PACKAGES
+% =====================================================================
 \usepackage[utf8]{inputenc}
+\usepackage[hebrew,english]{babel}   % RTL Hebrew; switch with \selectlanguage
 \usepackage{csquotes}
-\usepackage[hebrew,english]{babel}
-\usepackage{biblatex}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}                % \includegraphics
+\usepackage{float}                   % [H] figure placement
+\usepackage{caption}                 % caption formatting
+\usepackage{subcaption}              % side-by-side figures
+\usepackage{booktabs}                % professional tables
+\usepackage{siunitx}                 % SI units: \SI{470}{\ohm}
+\usepackage{hyperref}                % clickable refs
+\usepackage{geometry}
 \usepackage{tikz}
 \usepackage{indentfirst}
-\usepackage{lipsum}  
 
-\addbibresource{references.bib}
-
+% =====================================================================
+% PAGE GEOMETRY
+% =====================================================================
+\geometry{
+  a4paper,
+  top=2.5cm, bottom=2.5cm,
+  left=2.5cm, right=2.5cm
+}
 \parskip 2mm
-\addtolength{\textwidth}{1.4in} \addtolength{\oddsidemargin}{-0.5in}
-\addtolength{\evensidemargin}{-0.8in}
-\addtolength{\topmargin}{-0.5in} \addtolength{\textheight}{0.1in}
 
+% =====================================================================
+% HEBREW UNICODE DECLARATIONS
+% =====================================================================
 \DeclareUnicodeCharacter{05D0}{\hebalef}
 \DeclareUnicodeCharacter{05D1}{\hebbet}
 \DeclareUnicodeCharacter{05D2}{\hebgimel}
@@ -53,38 +60,129 @@ Email: {\tt author@mail.tau.ac.il}.}
 \DeclareUnicodeCharacter{05E9}{\hebshin}
 \DeclareUnicodeCharacter{05EA}{\hebtav}
 
+% =====================================================================
+% DOCUMENT
+% =====================================================================
 \begin{document}
-
 \selectlanguage{hebrew}
-\pagenumbering{gobble}
-\begin{abstract}
-אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט 
 
-אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט אבסטרקט 
-\end{abstract}
+% ----- Title block ---------------------------------------------------
+\begin{center}
+  {\LARGE \textbf{ניתוח דיודה ומעגל RLD — כאוס ודינמיקה לא-לינארית}}\\
+  \vspace{0.4cm}
+  {\large שקד סוקי}\\
+  {\large מעבדה ב-2, האוניברסיטה העברית בירושלים}\\
+  \vspace{0.2cm}
+  {\normalsize \today}
+\end{center}
 
-\selectlanguage{english}
-\begin{titlepage}
-    \begin{center}
-        \vspace*{0.05cm}
-        \includegraphics[width=0.8\textwidth]{taulogo.pdf}\\
-        \selectlanguage{hebrew}
-        \vspace{3cm}
-        {\huge כותרת כותרת כותרת כותרת כותרת \par}
-        \vspace{1cm}
-        {\large חיבור זה הוגש כחלק מהדרישות לקבלת התואר\\
-        \textquotedblright מוסמך אוניברסיטה\textquotedblleft\text{ }\textendash \text{ }.cS.M}\\
-        \vspace{2cm}
-        {\large על ידי}\\
-        \vspace{0.3cm}
-        {\LARGE \textbf{ישראל ישראלי}}\\
-        \vspace{1.5cm}
-        {\large העבודה נכתבה בהדרכתו של}\\
-        \vspace{0.3cm}
-        {\huge פרופ' חכמי חכמון}\\
-        \vspace{1cm}
-        {\Large בית הספר למדעי המחשב ע"ש בלווטניק \\ אוניברסיטת תל אביב}\\
-    \end{center}
-\end{titlepage}
+\hrule
+\vspace{0.5cm}
+
+% =====================================================================
+% §1  מטרה
+% =====================================================================
+\section*{מטרה}
+% ≤ 3 משפטים. תיאור מטרת הניסוי.
+% TODO: draft goal here
+
+\vspace{0.5cm}
+
+% =====================================================================
+% §2  מערכת ניסויית
+% =====================================================================
+\section*{מערכת ניסויית}
+% דיאגרמת מעגל + כיתוב. תיאור קצר של אופן המדידה ועיבוד הנתונים.
+% TODO: circuit diagram (TikZ or \includegraphics) + description
+
+\vspace{0.5cm}
+
+% =====================================================================
+% §3  גרפים
+% =====================================================================
+\section*{גרפים}
+
+% ----- Figure 1: Discrete I-V ----------------------------------------
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/graph1IV.png}
+  \caption{%
+    % (a) תופעה: עקומת I-V בדידה של דיודת 1N4005 (גל ריבועי, R=470Ω).
+    % (b) משוואת התאמה: $I = I_S\left(e^{V_D / n V_T} - 1\right)$, $V_T = 25.85\,\text{mV}$.
+    % (c) פרמטרים מחולצים: $n = $ TODO, $I_S = $ TODO A.
+    % (d) מקור שגיאה: קוונטיזציית ADC כ-80 mV (2 V/div, 8-bit); זרם מחושב $\sigma_I = \sigma_{\Delta V}/470\,\Omega$.
+    TODO — caption Fig 1
+  }
+  \label{fig:iv-discrete}
+\end{figure}
+
+% ----- Figure 2: Continuous I-V (triangle) ---------------------------
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/graph2IV_Triangle.png}
+  \caption{%
+    % (a) תופעה: עקומת I-V רציפה של דיודת 1N4005 (גל משולש, R=470Ω).
+    % (b) משוואת התאמה: Shockley.
+    % (c) פרמטרים: $n = $ TODO, $I_S = $ TODO A.
+    % (d) שגיאה: רצועת הסריקה הנראית לעין משקפת רעש; היסט ADC בהטיה הפוכה ≈ 0.3 mA — ארטיפקט מדידה.
+    TODO — caption Fig 2
+  }
+  \label{fig:iv-triangle}
+\end{figure}
+
+% ----- Figure 3: C(V) ------------------------------------------------
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/graph3C_V.png}
+  \caption{%
+    % (a) תופעה: קיבול מעבר דיודת 1N4005 כפונקציה של מתח הטיה הפוכה.
+    % (b) משוואת התאמה: $C_j(V) = a/\sqrt{|V|} + c$.
+    % (c) פרמטרים: $a = $ TODO F·V$^{1/2}$, $c = $ TODO F.
+    % (d) שגיאה: שגיאות אופקיות — קוונטיזציה; שגיאות אנכיות ($\tau$ → $C$) — TODO (להוסיף).
+    TODO — caption Fig 3
+  }
+  \label{fig:cv}
+\end{figure}
+
+% ----- Figure 4: Discrete bifurcation --------------------------------
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/graph4_bifrocation.png}
+  \caption{%
+    % (a) תופעה: דיאגרמת בפורקציה בדידה של מעגל RLD — מפלת הכפלת-מחזור.
+    % (b) אין התאמה.
+    % (c) גוון אפור — TODO (לבדוק ב-get_cycles.py מה מקודד).
+    % (d) שגיאה: קוונטיזציית ADC ≈ 80 mV; פסי שגיאה — להוסיף.
+    TODO — caption Fig 4
+  }
+  \label{fig:bif-discrete}
+\end{figure}
+
+% ----- Figure 5: Continuous bifurcation ------------------------------
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
+  \caption{%
+    % (a) תופעה: מפת בפורקציה רציפה של מעגל RLD (AM, נושאת ≈34 kHz, $f_{AM}$≈0.7 Hz, שיא 7 V).
+    %     כחול = משרעת עולה, אדום = יורדת; ההפרדה מצביעה על היסטרזיס.
+    %     ענף עליון: שיאי הטיה קדמית; ענף תחתון: שיאי הטיה הפוכה (קבועים, ≈-3.5 V).
+    % (b) אין התאמה.
+    % (c) קווי מעבר מחזור: 1→2 ≈ 3.0 V, 2→4 ≈ 3.5 V (הערכה חזותית, ±0.1 V).
+    % (d) שגיאה: קוונטיזציית ADC ≈ 80 mV.
+    TODO — caption Fig 5
+  }
+  \label{fig:bif-cont}
+\end{figure}
+
+\vspace{0.5cm}
+
+% =====================================================================
+% §4  מסקנות
+% =====================================================================
+\section*{מסקנות}
+% רשימת נקודות בלבד — תופעות שנצפו, הסכמה/אי-הסכמה עם תיאוריה.
+\begin{itemize}
+  \item TODO
+\end{itemize}
 
 \end{document}
