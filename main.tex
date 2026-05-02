@@ -84,15 +84,16 @@
 % =====================================================================
 \section*{מערכת הניסוי}
 
-\textbf{חלק 1 — אפיון דיודה:}
-מחולל פונקציות מחובר בטור עם נגד $R = \SI{470}{\ohm}$ ודיודה 1N4005.
+\textbf{שבוע 1 — אפיון דיודה:}
+מחולל פונקציות מחובר בטור עם נגד $R = \SI{470}{\ohm}$ ודיודת 1N4005.
+נמדדו עקומות I-V בגל ריבועי ובגל משולש, וכן קיבול המעגל דרך קצבי פריקה.
 ערוץ 1 (Ch1) מדד את מתח הדיודה; ערוץ 2 (Ch2) את מתח יציאת המחולל.
 הזרם חושב כ-$I_D = (V_{\text{Ch2}} - V_{\text{Ch1}}) / R$.
 
-\textbf{חלק 2 — מעגל RLD:}
-נוסף סליל $L = \SI{100}{\milli\henry}$ בטור. גל נושא בתדר $\approx\SI{34}{\kilo\hertz}$
-עם מודולציית AM בתדר $\SI{0.7}{\hertz}$ ושיא $\SI{7}{\volt}$ שימש לסריקה רציפה
-של משרעת הכניסה.
+\textbf{שבוע 2 — מעגל RLD:}
+נוסף סליל $L = \SI{100}{\milli\henry}$ בטור. נוצר אות סינוסי ונמדדו מתח השיא
+על הדיודה כפונקציה של משרעת הכניסה. לצורך סריקה רציפה הופעל גל נושא
+$\approx\SI{34}{\kilo\hertz}$ עם מודולציית AM בתדר $\SI{0.7}{\hertz}$ ושיא $\SI{7}{\volt}$.
 
 % ----- Circuit diagrams ----------------------------------------------
 \begin{figure}[H]
@@ -100,65 +101,63 @@
 \begin{english}
 \begin{circuitikz}[american, scale=0.85, font=\small]
 
-  % ---- Part 1: diode characterisation (top row) ----
-  \node[left] at (-0.3, 3.5) {\textbf{(1)}};
+  % ---- Week 1: diode characterisation (top circuit) ----
+  \node[left] at (-0.3, 5) {\textbf{(1)}};
 
   \draw
-    (0,2) to[sV, l=$V_{\!\text{gen}}$, i^>=$\,$] (0,4)
-    -- (1.5,4)
-    to[R, l=$R$, a={$470\,\Omega$}] (4.5,4)
-    to[D, l=1N4005] (7.5,4)
-    -- (7.5,2) -- (0,2);
+    (0,4) to[sV, l=$V_{\!\text{gen}}$] (0,6)
+    -- (1.5,6)
+    to[R, l=$R$, a={$470\,\Omega$}] (4.5,6)
+    to[D, l=1N4005] (7.5,6)
+    -- (7.5,4) -- (0,4);
 
-  % grounds
-  \draw (0,2)   node[ground]{};
-  \draw (7.5,2) node[ground]{};
-
-  % Ch2 probe tap (source node)
-  \draw[dashed, gray] (1.5,4) -- (1.5,3)
-    node[below]{\footnotesize Ch2};
-  \filldraw[gray] (1.5,4) circle (2pt);
-
-  % Ch1 probe tap (diode node)
-  \draw[dashed, gray] (7.5,4) -- (6.8,3)
-    node[below]{\footnotesize Ch1};
-  \filldraw[gray] (7.5,4) circle (2pt);
-
-  % ---- Part 2: RLD chaos circuit (bottom row) ----
-  \node[left] at (-0.3, 0) {\textbf{(2)}};
-
-  \draw
-    (0,-1) to[sV, l=$V_{\!\text{gen}}$] (0,1)
-    -- (1.5,1)
-    to[R, l=$R$, a={$470\,\Omega$}] (4,1)
-    to[L, l=$L$, a={$100\,\text{mH}$}] (6.5,1)
-    to[D, l=1N4005] (9.5,1)
-    -- (9.5,-1) -- (0,-1);
-
-  % grounds
-  \draw (0,-1)   node[ground]{};
-  \draw (9.5,-1) node[ground]{};
+  \draw (0,4)   node[ground]{};
+  \draw (7.5,4) node[ground]{};
 
   % Ch2 probe tap
-  \draw[dashed, gray] (1.5,1) -- (1.5,0)
+  \draw[dashed, gray] (1.5,6) -- (1.5,5)
     node[below]{\footnotesize Ch2};
-  \filldraw[gray] (1.5,1) circle (2pt);
+  \filldraw[gray] (1.5,6) circle (2pt);
 
   % Ch1 probe tap
-  \draw[dashed, gray] (9.5,1) -- (8.8,0)
+  \draw[dashed, gray] (7.5,6) -- (6.8,5)
     node[below]{\footnotesize Ch1};
-  \filldraw[gray] (9.5,1) circle (2pt);
+  \filldraw[gray] (7.5,6) circle (2pt);
+
+  % ---- Week 2: RLD chaos circuit (bottom circuit) ----
+  \node[left] at (-0.3, 1) {\textbf{(2)}};
+
+  \draw
+    (0,0) to[sV, l=$V_{\!\text{gen}}$] (0,2)
+    -- (1.5,2)
+    to[R, l=$R$, a={$470\,\Omega$}] (4,2)
+    to[L, l=$L$, a={$100\,\text{mH}$}] (6.5,2)
+    to[D, l=1N4005] (9.5,2)
+    -- (9.5,0) -- (0,0);
+
+  \draw (0,0)   node[ground]{};
+  \draw (9.5,0) node[ground]{};
+
+  % Ch2 probe tap
+  \draw[dashed, gray] (1.5,2) -- (1.5,1)
+    node[below]{\footnotesize Ch2};
+  \filldraw[gray] (1.5,2) circle (2pt);
+
+  % Ch1 probe tap
+  \draw[dashed, gray] (9.5,2) -- (8.8,1)
+    node[below]{\footnotesize Ch1};
+  \filldraw[gray] (9.5,2) circle (2pt);
 
 \end{circuitikz}
 \end{english}
 \caption{%
   תרשימי המעגל הניסויי.\newline
-  \textbf{(1) חלק 1 — אפיון דיודה:}
+  \textbf{(1) שבוע 1 — אפיון דיודה:}
   מחולל פונקציות בטור עם $R=\SI{470}{\ohm}$ ודיודת 1N4005.
-  Ch2 מודד את מתח המקור; Ch1 מודד את מתח הדיודה.
+  Ch2 מודד את מתח המקור ($V_{\text{Ch2}}$); Ch1 מודד את מתח הדיודה ($V_{\text{Ch1}}$).
   הזרם: $I_D = (V_{\text{Ch2}} - V_{\text{Ch1}})/\SI{470}{\ohm}$.\newline
-  \textbf{(2) חלק 2 — מעגל RLD:}
-  תוספת סליל $L=\SI{100}{\milli\henry}$ בטור. Ch2 ו-Ch1 כנ\"ל.
+  \textbf{(2) שבוע 2 — מעגל RLD:}
+  תוספת סליל $L=\SI{100}{\milli\henry}$ בטור לקבלת מעגל RLD. Ch2 ו-Ch1 כנ\"ל.
 }
 \label{fig:circuits}
 \end{figure}
