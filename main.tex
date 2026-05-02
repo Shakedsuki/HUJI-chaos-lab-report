@@ -7,7 +7,7 @@
 \usepackage{polyglossia}
 \setmainlanguage{hebrew}
 \setotherlanguage{english}
-\setmainfont{FreeSerif}          % fallback; Overleaf has this
+\setmainfont{FreeSerif}
 \newfontfamily\hebrewfont[Script=Hebrew]{FreeSerif}
 
 % =====================================================================
@@ -15,16 +15,24 @@
 % =====================================================================
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}            % \includegraphics
-\usepackage{float}               % [H] figure placement
-\usepackage{caption}             % caption formatting
-\usepackage{subcaption}          % side-by-side figures
-\usepackage{booktabs}            % professional tables
-\usepackage{siunitx}             % \SI{470}{\ohm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
 \usepackage{geometry}
 \usepackage{tikz}
 \usepackage{indentfirst}
 \usepackage{csquotes}
+\usepackage{xcolor}
+
+% Option A
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% Option B
+\usepackage{mdframed}
 
 % =====================================================================
 % PAGE GEOMETRY
@@ -35,6 +43,91 @@
   left=2.5cm, right=2.5cm
 }
 \parskip 2mm
+
+% =====================================================================
+% OPTION A — tcolorbox figure environment
+% Usage:
+%   \begin{figboxA}{fig:label}{מספר איור}{כותרת קצרה}
+%     \includegraphics[...]{...}
+%     \fcap{תופעה}{משוואה}{פרמטרים}{שגיאה}
+%   \end{figboxA}
+% =====================================================================
+\definecolor{headerblue}{RGB}{30, 60, 100}
+\definecolor{rowgray}{RGB}{245, 245, 248}
+
+\newcommand{\fcap}[4]{%
+  \vspace{4pt}
+  \begin{tabular}{@{} p{1.8cm} p{\dimexpr\linewidth-2.2cm} @{}}
+    \textbf{(א) תופעה:}   & #1 \\[3pt]
+    \textbf{(ב) התאמה:}   & #2 \\[3pt]
+    \textbf{(ג) פרמטרים:} & #3 \\[3pt]
+    \textbf{(ד) שגיאה:}   & #4 \\
+  \end{tabular}
+}
+
+\newtcolorbox[auto counter, number within=section]{figboxA}[3][]{
+  enhanced,
+  breakable,
+  colback=white,
+  colframe=headerblue,
+  coltitle=white,
+  colbacktitle=headerblue,
+  fonttitle=\bfseries\large,
+  title={איור \thetcbcounter\ — #3},
+  label={#2},
+  top=4pt, bottom=6pt, left=6pt, right=6pt,
+  attach boxed title to top right={yshift=-2mm, xshift=-4mm},
+  boxed title style={colframe=headerblue},
+  #1
+}
+
+% =====================================================================
+% OPTION B — mdframed light border environment
+% Usage:
+%   \begin{figboxB}
+%     \includegraphics[...]{...}
+%     \captionB{כותרת}{תופעה}{משוואה}{פרמטרים}{שגיאה}
+%   \end{figboxB}
+% =====================================================================
+\mdfdefinestyle{lightframe}{
+  linewidth=0.8pt,
+  linecolor=gray!60,
+  backgroundcolor=white,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  skipabove=8pt,
+  skipbelow=8pt,
+}
+
+\newenvironment{figboxB}{%
+  \begin{mdframed}[style=lightframe]
+  \centering
+}{%
+  \end{mdframed}
+}
+
+\newcommand{\captionB}[5]{%
+  \vspace{4pt}
+  \hrule height 0.4pt
+  \vspace{6pt}
+  \begin{flushleft}
+  \textbf{#1}\\[4pt]
+  \begin{tabular}{@{} p{1.8cm} p{\dimexpr\linewidth-2.5cm} @{}}
+    \textit{(א) תופעה:}   & #2 \\[3pt]
+    \textit{(ב) התאמה:}   & #3 \\[3pt]
+    \textit{(ג) פרמטרים:} & #4 \\[3pt]
+    \textit{(ד) שגיאה:}   & #5 \\
+  \end{tabular}
+  \end{flushleft}
+}
+
+% =====================================================================
+% OPTION C — standard figure + structured caption text only
+% Usage: standard \begin{figure} with \caption{} using \caplabel
+% =====================================================================
+\newcommand{\caplabel}[2]{\textbf{(#1)}~#2}
 
 % =====================================================================
 % DOCUMENT
@@ -58,8 +151,9 @@
 % §1  מטרת הניסוי
 % =====================================================================
 \section*{מטרת הניסוי}
-% ≤ 3 משפטים. תיאור מטרת הניסוי.
-% TODO: draft goal here
+
+ניסוי זה בוחן את התנהגות הדיודה 1N4005 דרך מדידת עקומת ה-I-V וקיבול המעבר, ואת מעגל ה-RLD כמערכת דינמית לא-לינארית המפגינה הכפלת-מחזור ומעבר לכאוס.
+המטרה היא לאמת את משוואת Shockley, למדוד את תלות $C_j(V)$, ולאפיין את מפת הבפורקציה של המעגל בהתאם לתיאוריה האוניברסלית של פייגנבאום.
 
 \vspace{0.5cm}
 
@@ -67,8 +161,15 @@
 % §2  מערכת הניסוי
 % =====================================================================
 \section*{מערכת הניסוי}
-% דיאגרמת מעגל + כיתוב. תיאור קצר של אופן המדידה ועיבוד הנתונים.
-% TODO: circuit diagram (TikZ or \includegraphics) + description
+
+\textbf{חלק 1 — אפיון דיודה:}
+מחולל פונקציות מחובר בטור עם נגד $R = \SI{470}{\ohm}$ ודיודה 1N4005.
+אוסצילוסקופ דיגיטלי דגם \textenglish{Tektronix} מדד את המתח בשני צמתים בו-זמנית:
+ערוץ 1 (Ch1) — מתח קצות הדיודה; ערוץ 2 (Ch2) — מתח יציאת המחולל.
+הזרם חושב כ-$I_D = (V_{\text{Ch2}} - V_{\text{Ch1}}) / R$.
+
+\textbf{חלק 2 — מעגל RLD:}
+נוסף סליל $L = \SI{100}{\milli\henry}$ בטור. גל נושא בתדר $\approx\SI{34}{\kilo\hertz}$ עם מודולציית AM בתדר $\SI{0.7}{\hertz}$ ושיא $\SI{7}{\volt}$ שימש לסריקה רציפה של משרעת הכניסה.
 
 \vspace{0.5cm}
 
@@ -77,55 +178,107 @@
 % =====================================================================
 \section*{תוצאות}
 
-% ----- Figure 1: Discrete I-V ----------------------------------------
-\begin{figure}[H]
+% -----------------------------------------------------------------
+%  OPTION A — tcolorbox  (Fig 1: Discrete I-V)
+% -----------------------------------------------------------------
+\vspace{4pt}
+\noindent\textbf{\textit{שיטת תצוגה א — מסגרת tcolorbox עם שורות כיתוב מובנות:}}
+\vspace{4pt}
+
+\begin{figboxA}{fig:iv-discrete}{איור 1 — עקומת I-V בדידה}
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/graph1IV.png}
-  \caption{%
-    TODO — caption Fig 1
-  }
-  \label{fig:iv-discrete}
+  \includegraphics[width=0.82\textwidth]{figures/graph1IV.png}
+  \fcap
+    {עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל ריבועי ($R = \SI{470}{\ohm}$).
+     כל נקודה מייצגת את ממוצע הדגימות בפלטו של הגל. נקודות עם $V_{pp} \geq \SI{6}{\volt}$
+     (סמנים חום-אדמוני) סוטות מהמודל עקב התנגדות סדרתית בזרמים גבוהים ואינן כלולות בהתאמה.}
+    {$I = I_S\!\left(e^{V_D/nV_T}-1\right)$, \quad $V_T = \SI{25.85}{\milli\volt}$ (ב-$T=\SI{300}{\kelvin}$)}
+    {גורם אידיאליות $n = \text{TODO}$, זרם רוויה $I_S = \text{TODO}~\si{\ampere}$}
+    {מתח: קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$ (2 V/div, 8-bit);
+     זרם: הפצת שגיאה $\sigma_I = \sigma_{\Delta V}/\SI{470}{\ohm}$}
+\end{figboxA}
+
+\vspace{12pt}
+
+% -----------------------------------------------------------------
+%  OPTION B — mdframed  (Fig 2: Triangle I-V)
+% -----------------------------------------------------------------
+\noindent\textbf{\textit{שיטת תצוגה ב — מסגרת mdframed עם הפרדה ויזואלית קלה:}}
+\vspace{4pt}
+
+\begin{figure}[H]
+\begin{figboxB}
+  \includegraphics[width=0.82\textwidth]{figures/graph2IV_Triangle.png}
+  \captionB
+    {איור 2 — עקומת I-V רציפה (גל משולש)}
+    {עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל משולש.
+     הרצועה הכחולה הרחבה משקפת את שני כיווני הסריקה (עולה ויורדת).
+     היסט חיובי קבוע של $\approx \SI{0.3}{\milli\ampere}$ בהטיה הפוכה הוא ארטיפקט
+     של רמת הבסיס של ה-ADC, ולא הולכת דיודה פיזיקלית.}
+    {$I = I_S\!\left(e^{V_D/nV_T}-1\right)$, מותאם לאזור הטיה קדמית ($V_D > \SI{0.3}{\volt}$)}
+    {$n = \text{TODO}$, \quad $I_S = \text{TODO}~\si{\ampere}$}
+    {הרצועה הנראית לעין (כיוון סריקה) היא אינדיקטור איכותי לרעש; אין פס שגיאה פורמלי.}
+\end{figboxB}
 \end{figure}
 
-% ----- Figure 2: Continuous I-V (triangle) ---------------------------
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.85\textwidth]{figures/graph2IV_Triangle.png}
-  \caption{%
-    TODO — caption Fig 2
-  }
-  \label{fig:iv-triangle}
-\end{figure}
+\vspace{12pt}
 
-% ----- Figure 3: C(V) ------------------------------------------------
+% -----------------------------------------------------------------
+%  OPTION C — standard figure + structured caption  (Fig 3: C(V))
+% -----------------------------------------------------------------
+\noindent\textbf{\textit{שיטת תצוגה ג — figure סטנדרטי עם כיתוב מובנה בטקסט:}}
+\vspace{4pt}
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/graph3C_V.png}
+  \includegraphics[width=0.82\textwidth]{figures/graph3C_V.png}
   \caption{%
-    TODO — caption Fig 3
+    \textbf{איור 3 — קיבול מעבר כפונקציה של מתח הטיה הפוכה.}
+    \caplabel{א}{תופעה:} קיבול מעבר דיודת 1N4005 פוחת עם עליית המתח ההפוך,
+    בהתאם לתיאוריית שכבת הניגוד. סך הוריאציה הנמדדת $\approx \SI{4.5}{\pico\farad}$
+    על בסיס $\approx \SI{200}{\pico\farad}$, מה שמצביע על ריסון חלש של ההתאמה.
+    \caplabel{ב}{התאמה:} $C_j(V) = a/\!\sqrt{|V|} + c$.
+    \caplabel{ג}{פרמטרים:} $a = \text{TODO}~\si{\farad\cdot\volt^{1/2}}$, $c = \text{TODO}~\si{\farad}$.
+    \caplabel{ד}{שגיאה:} שגיאות אופקיות — קוונטיזציית ADC; שגיאות אנכיות
+    ($\sigma_\tau \to \sigma_C = \sigma_\tau / R$) — טרם נוספו.
   }
   \label{fig:cv}
 \end{figure}
 
-% ----- Figure 4: Discrete bifurcation --------------------------------
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.85\textwidth]{figures/graph4_bifrocation.png}
-  \caption{%
-    TODO — caption Fig 4
-  }
-  \label{fig:bif-discrete}
-\end{figure}
+\vspace{12pt}
 
-% ----- Figure 5: Continuous bifurcation ------------------------------
-\begin{figure}[H]
+% -----------------------------------------------------------------
+%  Figs 4 & 5 use Option A (chosen style — fill in after decision)
+% -----------------------------------------------------------------
+
+\begin{figboxA}{fig:bif-discrete}{איור 4 — דיאגרמת בפורקציה בדידה}
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
-  \caption{%
-    TODO — caption Fig 5
-  }
-  \label{fig:bif-cont}
-\end{figure}
+  \includegraphics[width=0.82\textwidth]{figures/graph4_bifrocation.png}
+  \fcap
+    {דיאגרמת בפורקציה בדידה של מעגל RLD ($R=\SI{470}{\ohm}$, $L=\SI{100}{\milli\henry}$,
+     דיודת 1N4005), המציגה את שיאי מתח הדיודה כפונקציה של משרעת הכניסה.
+     נראית מפלת הכפלת-מחזור: 1→2→4→כאוס. גוון האפור — TODO (לבדוק ב-get\_cycles.py).}
+    {אין התאמה}
+    {אין}
+    {קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$ (2 V/div, 8-bit); פסי שגיאה — יש להוסיף.}
+\end{figboxA}
+
+\vspace{8pt}
+
+\begin{figboxA}{fig:bif-cont}{איור 5 — מפת בפורקציה רציפה (AM)}
+  \centering
+  \includegraphics[width=0.82\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
+  \fcap
+    {מפת בפורקציה רציפה של מעגל RLD הנמדדת בגל AM (נושאת $\approx\SI{34}{\kilo\hertz}$,
+     $f_{AM}\approx\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$). כל נקודה היא שיא מתח דיודה
+     קדמי אחד למחזור. כחול = משרעת עולה, אדום = יורדת; ההפרדה מצביעה על היסטרזיס
+     במעבר הבפורקציה. ענף עליון: שיאי הטיה קדמית; ענף תחתון: שיאי הטיה הפוכה
+     (קבועים, $\approx\SI{-3.5}{\volt}$).}
+    {אין התאמה}
+    {קווי מעבר מחזור (הערכה חזותית, $\pm\SI{0.1}{\volt}$):
+     $1\!\to\!2 \approx \SI{3.0}{\volt}$, $\;2\!\to\!4 \approx \SI{3.5}{\volt}$}
+    {קוונטיזציית ADC $\approx \SI{80}{\milli\volt}$.}
+\end{figboxA}
 
 \vspace{0.5cm}
 
@@ -133,6 +286,7 @@
 % §4  דיון
 % =====================================================================
 \section*{דיון}
+
 % TODO
 
 \vspace{0.5cm}
@@ -141,6 +295,7 @@
 % §5  נספחים
 % =====================================================================
 \section*{נספחים}
+
 % TODO
 
 \end{document}
