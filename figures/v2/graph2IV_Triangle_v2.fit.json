@@ -1,0 +1,31 @@
+{
+  "figure": "graph2IV_Triangle_v2",
+  "n_files": 3,
+  "n_cycles_total": 7,
+  "n_cycles_fit": 7,
+  "ensemble": {
+    "n_mean": 1.623263165701111,
+    "n_std": 0.10710116040706807,
+    "I_S_mean": 2.7320035941190943e-08,
+    "I_S_std": 3.757270824241889e-08
+  },
+  "pooled_fit": {
+    "model": "I = I_S (exp(V/(n V_T)) - 1)",
+    "fit_window": "V_D > 0.3 V",
+    "I_S": 2.7320035941190943e-08,
+    "I_S_sigma_cov": 3.757270824241889e-08,
+    "n": 1.623263165701111,
+    "n_sigma_cov": 0.10710116040706807,
+    "chi2_per_dof": 1.0136054421768708
+  },
+  "displacement_handling": "none (asymmetric triangles in this dataset; relying on per-cycle ensemble spread)",
+  "V_T_assumed": 0.02585,
+  "R_resistor": 470.0,
+  "files": [
+    "f_100Hz_V_1.8V_res_500mV.csv",
+    "f_100Hz_V_10V_res_5V.csv",
+    "f_6.6kHz_V_1.6V_res_500mV.csv"
+  ],
+  "git_sha": "cde0385",
+  "timestamp_utc": "2026-05-02T23:23:07.079659+00:00"
+}

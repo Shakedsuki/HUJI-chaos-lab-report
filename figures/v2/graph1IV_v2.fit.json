@@ -1,0 +1,49 @@
+{
+  "figure": "graph1IV_v2",
+  "n_files": 14,
+  "n_points_total": 14,
+  "n_points_fit_a": 7,
+  "n_points_fit_b": 13,
+  "fit_a": {
+    "model": "I = I_S (exp(V/(n V_T)) - 1)",
+    "exclusion": "Vpp not in (0.1, 2.0] V",
+    "I_S": 6.731582882561637e-10,
+    "I_S_sigma": 2.4075743451343955e-10,
+    "n": 1.531024236973219,
+    "n_sigma": 0.03688228041620515,
+    "chi2_per_dof": 6.920412988602079
+  },
+  "fit_b": {
+    "model": "I = I_S (exp((V_gen - I R_total)/(n V_T)) - 1)  [Lambert W form]",
+    "independent_variable": "Vpp from filename (V_gen)",
+    "exclusion": "Vpp <= 0.1 V (leakage-dominated)",
+    "I_S": 1.564275098467429e-09,
+    "I_S_sigma": 2.240312929730037e-09,
+    "n": 1.6639753316564758,
+    "n_sigma": 0.053318982737229285,
+    "R_total": 522.162950637366,
+    "R_total_sigma": 2.088134294967687,
+    "R_total_note": "Lumped: R_lab(470) + scope/probe/wire + diode R_s + function-generator output impedance. Excess over 470 ohm is the diode R_s plus parasitics.",
+    "chi2_per_dof": 0.9500810216012432
+  },
+  "V_T_assumed": 0.02585,
+  "R_resistor": 470.0,
+  "git_sha": "cde0385",
+  "timestamp_utc": "2026-05-02T23:22:55.816880+00:00",
+  "files": [
+    "V_50mV_res_20mV.csv",
+    "V_500mV_res_200mV.csv",
+    "V_700mV_res_500mV.csv",
+    "V_900mV_res_500mV.csv",
+    "V_1100mV_res_500mV.csv",
+    "V_1400mV_res_500mV.csv",
+    "V_1600mV_res_500mV.csv",
+    "V_1900mV_res_500mV.csv",
+    "V_2400mV_res_1V.csv",
+    "V_2900mV_res_1V.csv",
+    "V_4000mV_res_2V.csv",
+    "V_6000mV_res_2V.csv",
+    "V_8000mV_res_5V.csv",
+    "V_10000mV_res_5V.csv"
+  ]
+}
