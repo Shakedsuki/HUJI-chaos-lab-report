@@ -1,22 +1,30 @@
 \documentclass[11pt]{article}
 
 % =====================================================================
+% XeLaTeX + Hebrew setup
+% =====================================================================
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{hebrew}
+\setotherlanguage{english}
+\setmainfont{FreeSerif}          % fallback; Overleaf has this
+\newfontfamily\hebrewfont[Script=Hebrew]{FreeSerif}
+
+% =====================================================================
 % PACKAGES
 % =====================================================================
-\usepackage[utf8]{inputenc}
-\usepackage[hebrew,english]{babel}   % RTL Hebrew; switch with \selectlanguage
-\usepackage{csquotes}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}                % \includegraphics
-\usepackage{float}                   % [H] figure placement
-\usepackage{caption}                 % caption formatting
-\usepackage{subcaption}              % side-by-side figures
-\usepackage{booktabs}                % professional tables
-\usepackage{siunitx}                 % SI units: \SI{470}{\ohm}
+\usepackage{graphicx}            % \includegraphics
+\usepackage{float}               % [H] figure placement
+\usepackage{caption}             % caption formatting
+\usepackage{subcaption}          % side-by-side figures
+\usepackage{booktabs}            % professional tables
+\usepackage{siunitx}             % \SI{470}{\ohm}
 \usepackage{geometry}
 \usepackage{tikz}
 \usepackage{indentfirst}
+\usepackage{csquotes}
 
 % =====================================================================
 % PAGE GEOMETRY
@@ -29,41 +37,9 @@
 \parskip 2mm
 
 % =====================================================================
-% HEBREW UNICODE DECLARATIONS
-% =====================================================================
-\DeclareUnicodeCharacter{05D0}{\hebalef}
-\DeclareUnicodeCharacter{05D1}{\hebbet}
-\DeclareUnicodeCharacter{05D2}{\hebgimel}
-\DeclareUnicodeCharacter{05D3}{\hebdalet}
-\DeclareUnicodeCharacter{05D4}{\hebhe}
-\DeclareUnicodeCharacter{05D5}{\hebvav}
-\DeclareUnicodeCharacter{05D6}{\hebzayin}
-\DeclareUnicodeCharacter{05D7}{\hebhet}
-\DeclareUnicodeCharacter{05D8}{\hebtet}
-\DeclareUnicodeCharacter{05D9}{\hebyod}
-\DeclareUnicodeCharacter{05DA}{\hebfinalkaf}
-\DeclareUnicodeCharacter{05DB}{\hebkaf}
-\DeclareUnicodeCharacter{05DC}{\heblamed}
-\DeclareUnicodeCharacter{05DD}{\hebfinalmem}
-\DeclareUnicodeCharacter{05DE}{\hebmem}
-\DeclareUnicodeCharacter{05DF}{\hebfinalnun}
-\DeclareUnicodeCharacter{05E0}{\hebnun}
-\DeclareUnicodeCharacter{05E1}{\hebsamekh}
-\DeclareUnicodeCharacter{05E2}{\hebayin}
-\DeclareUnicodeCharacter{05E3}{\hebfinalpe}
-\DeclareUnicodeCharacter{05E4}{\hebpe}
-\DeclareUnicodeCharacter{05E5}{\hebfinaltsadi}
-\DeclareUnicodeCharacter{05E6}{\hebtsadi}
-\DeclareUnicodeCharacter{05E7}{\hebqof}
-\DeclareUnicodeCharacter{05E8}{\hebresh}
-\DeclareUnicodeCharacter{05E9}{\hebshin}
-\DeclareUnicodeCharacter{05EA}{\hebtav}
-
-% =====================================================================
 % DOCUMENT
 % =====================================================================
 \begin{document}
-\selectlanguage{hebrew}
 
 % ----- Title block ---------------------------------------------------
 \begin{center}
@@ -106,10 +82,6 @@
   \centering
   \includegraphics[width=0.85\textwidth]{figures/graph1IV.png}
   \caption{%
-    % (a) תופעה: עקומת I-V בדידה של דיודת 1N4005 (גל ריבועי, R=470Ω).
-    % (b) משוואת התאמה: $I = I_S\left(e^{V_D / n V_T} - 1\right)$, $V_T = 25.85\,\text{mV}$.
-    % (c) פרמטרים מחולצים: $n = $ TODO, $I_S = $ TODO A.
-    % (d) מקור שגיאה: קוונטיזציית ADC כ-80 mV (2 V/div, 8-bit); זרם מחושב $\sigma_I = \sigma_{\Delta V}/470\,\Omega$.
     TODO — caption Fig 1
   }
   \label{fig:iv-discrete}
@@ -120,10 +92,6 @@
   \centering
   \includegraphics[width=0.85\textwidth]{figures/graph2IV_Triangle.png}
   \caption{%
-    % (a) תופעה: עקומת I-V רציפה של דיודת 1N4005 (גל משולש, R=470Ω).
-    % (b) משוואת התאמה: Shockley.
-    % (c) פרמטרים: $n = $ TODO, $I_S = $ TODO A.
-    % (d) שגיאה: רצועת הסריקה הנראית לעין משקפת רעש; היסט ADC בהטיה הפוכה ≈ 0.3 mA — ארטיפקט מדידה.
     TODO — caption Fig 2
   }
   \label{fig:iv-triangle}
@@ -134,10 +102,6 @@
   \centering
   \includegraphics[width=0.85\textwidth]{figures/graph3C_V.png}
   \caption{%
-    % (a) תופעה: קיבול מעבר דיודת 1N4005 כפונקציה של מתח הטיה הפוכה.
-    % (b) משוואת התאמה: $C_j(V) = a/\sqrt{|V|} + c$.
-    % (c) פרמטרים: $a = $ TODO F·V$^{1/2}$, $c = $ TODO F.
-    % (d) שגיאה: שגיאות אופקיות — קוונטיזציה; שגיאות אנכיות ($\tau$ → $C$) — TODO (להוסיף).
     TODO — caption Fig 3
   }
   \label{fig:cv}
@@ -148,10 +112,6 @@
   \centering
   \includegraphics[width=0.85\textwidth]{figures/graph4_bifrocation.png}
   \caption{%
-    % (a) תופעה: דיאגרמת בפורקציה בדידה של מעגל RLD — מפלת הכפלת-מחזור.
-    % (b) אין התאמה.
-    % (c) גוון אפור — TODO (לבדוק ב-get_cycles.py מה מקודד).
-    % (d) שגיאה: קוונטיזציית ADC ≈ 80 mV; פסי שגיאה — להוסיף.
     TODO — caption Fig 4
   }
   \label{fig:bif-discrete}
@@ -162,12 +122,6 @@
   \centering
   \includegraphics[width=0.85\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
   \caption{%
-    % (a) תופעה: מפת בפורקציה רציפה של מעגל RLD (AM, נושאת ≈34 kHz, $f_{AM}$≈0.7 Hz, שיא 7 V).
-    %     כחול = משרעת עולה, אדום = יורדת; ההפרדה מצביעה על היסטרזיס.
-    %     ענף עליון: שיאי הטיה קדמית; ענף תחתון: שיאי הטיה הפוכה (קבועים, ≈-3.5 V).
-    % (b) אין התאמה.
-    % (c) קווי מעבר מחזור: 1→2 ≈ 3.0 V, 2→4 ≈ 3.5 V (הערכה חזותית, ±0.1 V).
-    % (d) שגיאה: קוונטיזציית ADC ≈ 80 mV.
     TODO — caption Fig 5
   }
   \label{fig:bif-cont}
