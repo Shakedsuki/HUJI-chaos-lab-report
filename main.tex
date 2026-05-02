@@ -37,11 +37,12 @@
 % CAPTION STYLE
 % =====================================================================
 \captionsetup{
-  justification=raggedright,
+  justification=justified,
   singlelinecheck=false,
   font=small,
-  labelfont=bf,
+  labelsep=endash,
 }
+\renewcommand{\figurename}{איור}
 
 % Structured caption label helper: \caplabel{א}{תופעה}
 \newcommand{\caplabel}[2]{\textbf{(#1) #2:}\ }
@@ -103,7 +104,7 @@
   \centering
   \includegraphics[width=\textwidth]{figures/graph1IV.png}
   \caption{%
-    \textbf{איור 1 — עקומת I-V בדידה (גל ריבועי).}
+    \textbf{עקומת I-V בדידה (גל ריבועי).}
     \caplabel{א}{תופעה}%
     עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל ריבועי ($R = \SI{470}{\ohm}$).
     כל נקודה מייצגת ממוצע של דגימות בפלטו.
@@ -125,7 +126,7 @@
   \centering
   \includegraphics[width=\textwidth]{figures/graph2IV_Triangle.png}
   \caption{%
-    \textbf{איור 2 — עקומת I-V רציפה (גל משולש).}
+    \textbf{עקומת I-V רציפה (גל משולש).}
     \caplabel{א}{תופעה}%
     עקומת מאפייני I-V של דיודת 1N4005 הנמדדת בגל משולש.
     הרצועה הכחולה הרחבה משקפת את שני כיווני הסריקה (עולה ויורדת).
@@ -146,7 +147,7 @@
   \centering
   \includegraphics[width=\textwidth]{figures/graph3C_V.png}
   \caption{%
-    \textbf{איור 3 — קיבול מעבר $C_j(V)$.}
+    \textbf{קיבול מעבר $C_j(V)$.}
     \caplabel{א}{תופעה}%
     קיבול מעבר דיודת 1N4005 פוחת עם עליית המתח ההפוך, בהתאם לתיאוריית שכבת הניגוד.
     סך הוריאציה הנמדדת $\approx \SI{4.5}{\pico\farad}$ על בסיס
@@ -167,7 +168,7 @@
   \centering
   \includegraphics[width=\textwidth]{figures/graph4_bifrocation.png}
   \caption{%
-    \textbf{איור 4 — דיאגרמת בפורקציה בדידה של מעגל RLD.}
+    \textbf{דיאגרמת בפורקציה בדידה של מעגל RLD.}
     \caplabel{א}{תופעה}%
     דיאגרמת בפורקציה בדידה ($R=\SI{470}{\ohm}$, $L=\SI{100}{\milli\henry}$, דיודת 1N4005)
     המציגה את שיאי מתח הדיודה כפונקציה של משרעת הכניסה.
@@ -188,7 +189,7 @@
   \centering
   \includegraphics[width=\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
   \caption{%
-    \textbf{איור 5 — מפת בפורקציה רציפה (AM).}
+    \textbf{מפת בפורקציה רציפה (AM).}
     \caplabel{א}{תופעה}%
     מפת בפורקציה רציפה של מעגל RLD (נושאת $\approx\SI{34}{\kilo\hertz}$,
     $f_{AM}\approx\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$).
