@@ -171,17 +171,9 @@ $I_D=(V_{\text{Ch2}}-V_{\text{Ch1}})/R$;
 % ----- Figure 1: I-V (square wave) -----------------------------------
 \begin{figure}[H]
   \centering
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/graph1IV.png}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/v2/graph1IV_v2.png}
-  \end{minipage}
+  \includegraphics[width=\textwidth]{figures/graph1IV.png}
   \caption{%
-    \textbf{עקומת I-V בדידה (גל ריבועי) — גרסה 1 (שמאל) וגרסה 2 (ימין).}
+    \textbf{עקומת I-V בדידה (גל ריבועי).}
     \caplabel{א}{תופעה}%
     עקומת אופיין I-V של דיודת 1N4005 ($R=\SI{470}{\ohm}$, גל ריבועי).
     כל נקודה מייצגת ממוצע ערכי המתח בחלקים היציבים של הגל.
@@ -207,17 +199,9 @@ $I_D=(V_{\text{Ch2}}-V_{\text{Ch1}})/R$;
 % ----- Figure 2: I-V (triangle wave) ---------------------------------
 \begin{figure}[H]
   \centering
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/graph2IV_Triangle.png}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/v2/graph2IV_Triangle_v2.png}
-  \end{minipage}
+  \includegraphics[width=\textwidth]{figures/graph2IV_Triangle_Band_Zoom.png}
   \caption{%
-    \textbf{עקומת I-V רציפה (גל משולש) — גרסה 1 (שמאל) וגרסה 2 (ימין).}
+    \textbf{עקומת I-V רציפה (גל משולש).}
     \caplabel{א}{תופעה}%
     עקומת אופיין I-V של דיודת 1N4005 ($R=\SI{470}{\ohm}$, גל משולש).
     גרסה 1 מבוססת על קובץ יחיד; גרסה 2 על מקבץ של 7 מחזורים משלושה קבצים.
@@ -239,17 +223,9 @@ $I_D=(V_{\text{Ch2}}-V_{\text{Ch1}})/R$;
 % ----- Figure 3: C(V) ------------------------------------------------
 \begin{figure}[H]
   \centering
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/graph3C_V.png}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/v2/graph3C_V_v2.png}
-  \end{minipage}
+  \includegraphics[width=\textwidth]{figures/graph3C_V_better.png}
   \caption{%
-    \textbf{קיבול הדיודה $C_j(V)$ — גרסה 1 (שמאל) וגרסה 2 (ימין).}
+    \textbf{קיבול הדיודה $C_j(V)$.}
     \caplabel{א}{תופעה}%
     קיבול דיודת 1N4005 כפונקציה של ממתח אחורי.
     גרסה 2 כוללת שתי התאמות: פנומנולוגית ופיזיקלית.
@@ -271,51 +247,23 @@ $I_D=(V_{\text{Ch2}}-V_{\text{Ch1}})/R$;
   \label{fig:cv}
 \end{figure}
 
-% ----- Figure 4: Discrete bifurcation --------------------------------
+% ----- Figures 4+5: Discrete + Continuous bifurcation ---------------
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{figures/graph4_bifrocation.png}
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/graph4_bifrocation_better.png}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/graph5_bifurcation_continuous_nir.png}
+  \end{minipage}
   \caption{%
-    \textbf{מפת ביפורקציות דיסקרטית של מעגל RLD.}
-    \caplabel{א}{תופעה}%
-    מפת ביפורקציות דיסקרטית ($R=\SI{1}{\kilo\ohm}$, $L=\SI{100}{\milli\henry}$, דיודת 1N4005)
-    המציגה את שיאי מתח הדיודה כפונקציה של האמפליטודה.
-    מפלת הכפלת-מחזור 1→2→4→כאוס נראית בבירור.
-    צפיפות הנקודות מקודדת בגוון: כל נקודה מצוירת בשקיפות ($\alpha=0.1$),
-    כך שאזורים כהים יותר מציינים ערכים בהם המסלול שוהה זמן רב יותר —
-    מסלולים מחזוריים יציבים מופיעים כפסים כהים, אזורים כאוטיים כעננה.
-    \caplabel{ב}{התאמה}%
-    אין.
-    \caplabel{ג}{פרמטרים}%
-    אין.
-    \caplabel{ד}{שגיאה}%
-    קוונטיזציית ADC $\approx\SI{80}{\milli\volt}$ (2\,V/div, 8-bit).
+    \textbf{מפת ביפורקציות — דיסקרטית (שמאל) ורציפה (ימין).}
+    % TODO: caption to be drafted
   }
-  \label{fig:bif-discrete}
-\end{figure}
-
-% ----- Figure 5: Continuous bifurcation ------------------------------
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{figures/graph5_bifurcation_cont_triangle.png}
-  \caption{%
-    \textbf{מפת ביפורקציות רציפה (AM).}
-    \caplabel{א}{תופעה}%
-    מפת ביפורקציות רציפה של מעגל RLD ($R=\SI{1}{\kilo\ohm}$, $L=\SI{100}{\milli\henry}$,
-    נושאת $\approx\SI{34}{\kilo\hertz}$, $f_{AM}\approx\SI{0.7}{\hertz}$, שיא $\SI{7}{\volt}$).
-    כל נקודה היא שיא מתח דיודה אחד למחזור נושאת.
-    כחול = אמפליטודה עולה, אדום = יורדת; ההפרדה מצביעה על היסטרזיס במעברי הביפורקציה.
-    ענף עליון: שיאי ממתח קדמי; ענף תחתון: שיאי ממתח אחורי
-    (קבועים, $\approx\SI{-3.5}{\volt}$).
-    \caplabel{ב}{התאמה}%
-    אין.
-    \caplabel{ג}{פרמטרים}%
-    קווי מעבר מחזור (הערכה חזותית, $\pm\SI{0.1}{\volt}$):
-    $1\!\to\!2\approx\SI{3.0}{\volt}$,\quad $2\!\to\!4\approx\SI{3.5}{\volt}$.
-    \caplabel{ד}{שגיאה}%
-    קוונטיזציית ADC $\approx\SI{80}{\milli\volt}$.
-  }
-  \label{fig:bif-cont}
+  \label{fig:bif-both}
 \end{figure}
 
 \vspace{0.5cm}
