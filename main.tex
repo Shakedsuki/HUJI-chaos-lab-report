@@ -147,11 +147,12 @@
 % =====================================================================
 \section*{תוצאות}
 
-% ----- Figure 1: I-V (square wave) -----------------------------------
-\begin{figure}[H]
+% ----- Figures 3+4: I-V plots on same page --------------------------
+\noindent
+\begin{minipage}{\textwidth}
   \centering
   \includegraphics[width=\textwidth]{figures/graph1IV.png}
-  \caption{%
+  \captionof{figure}{%
     \textbf{עקומת האופיין של דיודה (גל ריבועי, דיסקרטי).}
     הגרף מציג את עקומת האופיין I-V הדיסקרטית של דיודת סיליקון 1N4005,
     שנמדדה באמצעות גל ריבועי ב-14 ערכי אמפליטודה ($V_{pp} = 0.05$–$10\,\si{\volt}$);
@@ -172,13 +173,15 @@
     $I = (V_{\text{Ch2}} - V_{\text{Ch1}}) / \SI{470}{\ohm}$.
   }
   \label{fig:iv-discrete}
-\end{figure}
+\end{minipage}
 
-% ----- Figure 2: I-V (triangle wave) ---------------------------------
-\begin{figure}[H]
+\vspace{1em}
+
+\noindent
+\begin{minipage}{\textwidth}
   \centering
   \includegraphics[width=\textwidth]{figures/graph2IV_Triangle_Band_Zoom.png}
-  \caption{%
+  \captionof{figure}{%
     \textbf{עקומת האופיין של הדיודה (גל משולש, רציף).}
     הגרף מציג את עקומת האופיין I-V הרציפה של הדיודה שנמדדה באמצעות גל משולש
     (ראו איור~\ref{fig:circuit-week1}).
@@ -189,7 +192,7 @@
     (איור~\ref{fig:iv-discrete}).
   }
   \label{fig:iv-triangle}
-\end{figure}
+\end{minipage}
 
 % ----- Figure 3: C(V) ------------------------------------------------
 \begin{figure}[H]
